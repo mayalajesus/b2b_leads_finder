@@ -3,6 +3,7 @@ import json
 import pandas as pd
 from dotenv import load_dotenv
 import os
+import streamlit as st
 
 # Carrega as variáveis de ambiente
 load_dotenv()
@@ -11,6 +12,11 @@ load_dotenv()
 API_KEYS = [os.getenv("API_KEY_1"), os.getenv("API_KEY_2")]
 SEARCH_URL = "https://api.apollo.io/api/v1/mixed_people/api_search"
 MATCH_URL = "https://api.apollo.io/api/v1/people/match"
+
+API_KEYS = [
+    st.secrets.get("API_KEY_1", os.getenv("API_KEY_1")),
+    st.secrets.get("API_KEY_2", os.getenv("API_KEY_2"))
+]
 
 def request_apollo(url, payload):
     """Faz requisições alternando API keys apenas em erro de autenticação/limite."""
